@@ -86,16 +86,34 @@
       margin-top: 62px;
       
     }
-    input
-    {
-      color: white !important;
-      border-bottom: solid 1px white !important;
-    }
+      input
+      {
+        color: white !important;
+        border-bottom: solid 1px white !important;
+        
+      }
+
+    
     textarea
     {
       color: white !important;
       border-bottom: solid 1px white !important;
     }
+    /*input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: 1px solid green;
+  -webkit-text-fill-color: green;
+  -webkit-background-color:green;
+  -webkit-box-shadow: 0 0 0px 1000px #000 inset;
+  transition: background-color 5000s ease-in-out 0s;
+}*/
    
   </style>
  
@@ -346,14 +364,14 @@
        
         <!--Grid column-->
         
-        <div class="col-md-9 mb-md-0 mb-5">
+        <div class="col-md-12 mb-md-0 mb-5">
             <form id="contact-form" name="contact-form" action="mail.php" method="POST">
 
                 <!--Grid row-->
                 <div class="row">
                     
                     <!--Grid column-->
-                    <div class="col-md-6">
+                    <div class="col-lg-6">
                         <div class="md-form mb-0">
                             <input type="text" id="name" name="name" class="form-control">
                             <label for="name" class="text-white">Your name</label>
@@ -362,7 +380,7 @@
                     <!--Grid column-->
 
                     <!--Grid column-->
-                    <div class="col-md-6">
+                    <div class="col-lg-6">
                         <div class="md-form mb-0">
                             <input type="text" id="email" name="email" class="form-control" required>
                             <label for="email" class="text-white">Your email</label>
@@ -398,8 +416,9 @@
                     </div>
                 </div>
                 <!--Grid row-->
-                <div class="text-center text-md-left">
+                <div class="text-center">
                 <a class="btn btn-primary" onclick="validateForm()" style="margin-bottom: 28px;">Send</a>
+                <input style="display: none;" type="reset" id="reset">
             </div>
             
             <div class="status"></div>
@@ -425,8 +444,8 @@
 
 <!-- footer -->
 <div class="row text-white" style="background-color:#004d40; margin:0px 0px 0px 0px;">
-    <div class="col-lg-12" style="padding: 0px;">
-      <p style="font-size: 25px; margin-left:60px;">See what I'm upto</p>
+    <div class="col-lg-12" style="padding: 0px; text-align: center;">
+      <p style="font-size: 25px; margin-left:60px; margin-top: 20px;">See what I'm upto</p>
        <div class="row" style="margin: 0px 0px 30px 40px;">
         <div class="col-lg-3" style="padding: 5px 15px 5px 15px;">
         <a href="https://twitter.com/Ishra99010582?s=09" target="_blank" style="font-size: 20px; font-family: 'Playfair Display', serif; color: white;"><i class="fab fa-twitter fa-lg mr-md-2 mr-3 fa-2x" style="color:#55acee;"></i>On Twitter</a> 
@@ -449,7 +468,7 @@
 
    <!-- Copyright -->
   <div class="footer-copyright text-center py-3 text-white" style="background-color:#004d40;">© 2020 Ishra Ali:
-    <a href="https://mdbootstrap.com/" class="text-white"> All rights reserved.</a>
+    <a href="https://mdbootstrap.com/" class="text-white"> All rights reserved</a>
   </div>
   <!-- Copyright -->
 <!-- /footer -->
@@ -502,7 +521,11 @@ function validateForm() {
       return false;
   }
   document.querySelector('.status').innerHTML = "Sending...";
-  sendEmail();
+  if(sendEmail())
+  {
+    document.getElementById('reset').click();
+  }
+  
 }
 
 
@@ -518,6 +541,7 @@ function sendEmail() {
   }).then(
     message =>  document.querySelector('.status').innerHTML = "Message Sent Successfully."
   );
+ return true;
 }
 
 </script>
